@@ -64,38 +64,38 @@ exports.getAllQuestionSets = async (req, res) => {
 
 // Generate a new question set using OpenAI or Mistral AI based on the model from frontend
 exports.generateQuestionSet = async (req, res) => {
-    const { prompt, model } = req.body;
+    const { tags, model } = req.body;
 
     // Validate input from frontend
-    if (!prompt || !model || (model !== "openai" && model !== "mistral" && model !== "llama")) {
-        return res.status(400).json({ error: 'Please provide a valid prompt and model (model should be "openai" or "mistral" or "llama")' });
+    if (!tags || !model || (model !== "gpt-4o-mini" && model !== "mistral-small" && model !== "llama3-8b-8192")) {
+        return res.status(400).json({ error: 'Please provide a valid tags and model (model should be "openai" or "mistral" or "llama")' });
     }
 
     try {
         let generatedText;
 
-        if (model === "openai") {
-            // Use NAGA OpenAI API with the provided prompt
+        if (model === "gpt-4o-mini") {
+            // Use NAGA OpenAI API with the provided tags
             const response = await openai.chat.completions.create({
                 model: "gpt-4o-mini",
                 messages: [
-                    { role: "system", content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1","answer1"},{"question2","answer2"},...] strictly no other text. Prompt: ${prompt}` },
-                    { role: "user", content: prompt }
+                    { role: "system", content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1","answer1"},{"question2","answer2"},...] with no other text. Give me those questions based on tags:: ${tags}` },
+                    { role: "user", content: tags }
                 ],
             });
             generatedText = response.choices[0].message.content.trim();
-        } else if (model === "mistral") {
+        } else if (model === "mistral-small") {
             // Use Mistral AI API
             const chatResponse = await mistralClient.chat.complete({
                 model: 'mistral-small',
-                messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1","answer1"},{"question2","answer2"},...] strictly no other text. Prompt: ${prompt}` }],
+                messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question 1","answer 1"},{"question 2","answer 2"},...] with no other text. Give me those questions based on tags:: ${tags}` }],
             });
             console.log("response:", chatResponse.choices[0].message.content)
             generatedText = chatResponse.choices[0].message.content;
-        } else if (model === "llama") {
+        } else if (model === "llama3-8b-8192") {
         // Use llama AI API
         const chatResponse = await llamaClient.chat.completions.create({
-            messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1","answer1"},{"question2","answer2"},...] strictly no other text. Prompt: ${prompt}`  }],
+            messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1","answer1"},{"question2","answer2"},...] with no other text. Give me those questions based on tags:: ${tags}` }],
             model: 'llama-3.1-8b-instant',
           });
         console.log("response:", chatResponse.choices[0].message.content)

@@ -34,6 +34,12 @@ router.get('/:id', getQuestionSetById);
 router.get('/', getAllQuestionSets);
 
 // Route for generating a question set via OpenAI
+// Example
+// http://localhost:3000/api/questionsets/generate
+// {
+//     "tags":["technology","space"],
+//     "model": "llama3-8b-8192"
+//   }
 router.post('/generate', generateQuestionSet);
 
 module.exports = router;
