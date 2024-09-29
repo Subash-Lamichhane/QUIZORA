@@ -3,6 +3,7 @@ const QuestionSet = require('../models/questionSetModel');
 const axios = require('axios');
 const { Mistral } = require('@mistralai/mistralai')
 const { OpenAI } = require('openai')
+const { Groq } = require('groq-sdk')
 require('dotenv').config();
 
 const OPENAI_API_KEY = process.env.NAGA_API_KEY;
@@ -10,11 +11,13 @@ const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL;
 const MISTRAL_API_KEY = process.env.MISTRAL_API_KEY;
 
 const openai = new OpenAI({
-    baseURL: OPENAI_BASE_URL, // Custom base URL for OpenAI
-    apiKey: OPENAI_API_KEY // Use OpenAI API key
+    apiKey: OPENAI_API_KEY, // Use OpenAI API key
+    baseURL: OPENAI_BASE_URL// Custom base URL for OpenAI
 });
-
-const client = new Mistral(MISTRAL_API_KEY)
+const llamaClient = new Groq({
+    apiKey: process.env.GROQ_API_KEY,
+  });
+const mistralClient = new Mistral(MISTRAL_API_KEY)
 
 // Add a new question set
 exports.addQuestionSet = async (req, res) => {
@@ -64,8 +67,8 @@ exports.generateQuestionSet = async (req, res) => {
     const { prompt, model } = req.body;
 
     // Validate input from frontend
-    if (!prompt || !model || (model !== "openai" && model !== "mistral")) {
-        return res.status(400).json({ error: 'Please provide a valid prompt and model (model should be "openai" or "mistral")' });
+    if (!prompt || !model || (model !== "openai" && model !== "mistral" && model !== "llama")) {
+        return res.status(400).json({ error: 'Please provide a valid prompt and model (model should be "openai" or "mistral" or "llama")' });
     }
 
     try {
@@ -76,23 +79,31 @@ exports.generateQuestionSet = async (req, res) => {
             const response = await openai.chat.completions.create({
                 model: "gpt-4o-mini",
                 messages: [
-                    { role: "system", content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1":"answer1"},{"question2":"answer2"},...] strictly no other text. Prompt: ${prompt}`},
+                    { role: "system", content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1","answer1"},{"question2","answer2"},...] strictly no other text. Prompt: ${prompt}` },
                     { role: "user", content: prompt }
                 ],
             });
             generatedText = response.choices[0].message.content.trim();
         } else if (model === "mistral") {
             // Use Mistral AI API
-            const chatResponse = await client.chat.complete({
-                model: 'mistral-tiny',
-                messages: [{role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1":"answer1"},{"question2":"answer2"},...] strictly no other text. Prompt: ${prompt}` }],
-              });              
-              console.log("response:",chatResponse.choices[0].message.content)
+            const chatResponse = await mistralClient.chat.complete({
+                model: 'mistral-small',
+                messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1","answer1"},{"question2","answer2"},...] strictly no other text. Prompt: ${prompt}` }],
+            });
+            console.log("response:", chatResponse.choices[0].message.content)
             generatedText = chatResponse.choices[0].message.content;
-        }
-        res.status(201).json(generatedText);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Failed to generate question set' });
+        } else if (model === "llama") {
+        // Use llama AI API
+        const chatResponse = await llamaClient.chat.completions.create({
+            messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1","answer1"},{"question2","answer2"},...] strictly no other text. Prompt: ${prompt}`  }],
+            model: 'llama-3.1-8b-instant',
+          });
+        console.log("response:", chatResponse.choices[0].message.content)
+        generatedText = chatResponse.choices[0].message.content;
     }
+    res.status(201).json(generatedText);
+} catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to generate question set' });
+}
 };
