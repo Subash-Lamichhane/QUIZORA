@@ -1,23 +1,22 @@
+// server.js
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors')
 const bodyParser = require('body-parser');
-const quizRoutes = require('./routes/quizRoutes');
-const connectDB = require('./config/db');
+const connectDB = require('./config/db');  // Import the database connection
+const questionSetRoutes = require('./routes/questionSetRoutes');
+
 const app = express();
-const port = 3000;
-
-app.use(cors())
-
-// Connect to MongoDB
-connectDB();
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json());
 
-// Routes
-app.use('/api/quiz', quizRoutes);
+// Connect to MongoDB
+connectDB();  // Connect to the database
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+// Routes
+app.use('/api/questionsets', questionSetRoutes);
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
