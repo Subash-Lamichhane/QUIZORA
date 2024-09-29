@@ -1,7 +1,9 @@
-import QuizPage from "./pages/QuizPage";
+import React from "react";
 
-const App = () => {
-  return <QuizPage />;
+import AppRoutes from "./routes/AppRoutes";
+
+const App: React.FC = () => {
+  return <AppRoutes />;
 };
 
 export default App;

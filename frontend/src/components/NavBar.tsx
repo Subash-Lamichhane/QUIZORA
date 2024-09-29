@@ -1,13 +1,20 @@
-import { FaGraduationCap } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 
 const NavBar = () => {
   return (
-    <div className="px-64  py-10 h-[10%] bg-white flex justify-start items-center gap-2 border-gray-300 border-b-[0.5px]">
-      <div className="flex justify-center items-center">
-        <FaGraduationCap className="text-4xl" />
-      </div>
-      <div className="font-black  text-2xl flex justify-center items-center">
+    <div className="px-64 py-6 h-[10vh] flex justify-between items-center">
+      <div className="font-black  text-xl flex justify-center items-center">
         {"Quizora".toUpperCase()}
+      </div>
+
+      <ul className="flex space-x-12 text-xl">
+        <li>Home</li>
+        <li>About</li>
+        <li>FAQ</li>
+      </ul>
+
+      <div className="text-3xl">
+        <FaGithub />
       </div>
     </div>
   );
