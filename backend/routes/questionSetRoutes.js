@@ -4,7 +4,8 @@ const router = express.Router();
 const {
     addQuestionSet,
     getQuestionSetById,
-    getAllQuestionSets
+    getAllQuestionSets,
+    generateQuestionSet
 } = require('../controllers/questionSetController');
 
 // Route for adding a question set
@@ -31,5 +32,8 @@ router.get('/:id', getQuestionSetById);
 // Method: GET
 // URL: http://localhost:3000/api/questionsets/<id>
 router.get('/', getAllQuestionSets);
+
+// Route for generating a question set via OpenAI
+router.post('/generate', generateQuestionSet);
 
 module.exports = router;
