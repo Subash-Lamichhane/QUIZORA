@@ -19,16 +19,16 @@ const llamaClient = new Groq({
   });
 const mistralClient = new Mistral(MISTRAL_API_KEY)
 
-// Add a new question set
+// controllers/questionSetController.js
 exports.addQuestionSet = async (req, res) => {
-    const { questions } = req.body;
+    const { name, description, questions } = req.body; // Include description in the destructured variables
 
-    if (!questions || !Array.isArray(questions) || questions.length === 0) {
-        return res.status(400).json({ msg: 'Please provide a set of questions' });
+    if (!name || !description || !questions || !Array.isArray(questions) || questions.length === 0) {
+        return res.status(400).json({ msg: 'Please provide a name, description, and a set of questions' });
     }
 
     try {
-        const newQuestionSet = new QuestionSet({ questions });
+        const newQuestionSet = new QuestionSet({ name, description, questions }); // Save name, description, and questions
         await newQuestionSet.save();
         res.status(201).json(newQuestionSet);
     } catch (err) {
@@ -79,8 +79,7 @@ exports.generateQuestionSet = async (req, res) => {
             const response = await openai.chat.completions.create({
                 model: "gpt-4o-mini",
                 messages: [
-                    { role: "system", content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1","answer1"},{"question2","answer2"},...] with no other text. Give me those questions based on tags:: ${tags}` },
-                    { role: "user", content: tags }
+                    { role: "system", content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question":"question1","answer":"answer1"},{"question":"question2","answer":"answer2"},...] with no other text. Give me those questions based on tags:: ${tags}` },
                 ],
             });
             generatedText = response.choices[0].message.content.trim();
@@ -88,14 +87,14 @@ exports.generateQuestionSet = async (req, res) => {
             // Use Mistral AI API
             const chatResponse = await mistralClient.chat.complete({
                 model: 'mistral-small',
-                messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question 1","answer 1"},{"question 2","answer 2"},...] with no other text. Give me those questions based on tags:: ${tags}` }],
+                messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question":"question1","answer":"answer1"},{"question":"question2","answer":"answer2"},...] with no other text. Give me those questions based on tags:: ${tags}`}],
             });
             console.log("response:", chatResponse.choices[0].message.content)
             generatedText = chatResponse.choices[0].message.content;
         } else if (model === "llama3-8b-8192") {
         // Use llama AI API
         const chatResponse = await llamaClient.chat.completions.create({
-            messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question1","answer1"},{"question2","answer2"},...] with no other text. Give me those questions based on tags:: ${tags}` }],
+            messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question":"question1","answer":"answer1"},{"question":"question2","answer":"answer2"},...] with no other text. Give me those questions based on tags:: ${tags}`}],
             model: 'llama-3.1-8b-instant',
           });
         console.log("response:", chatResponse.choices[0].message.content)

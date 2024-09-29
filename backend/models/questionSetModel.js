@@ -15,6 +15,14 @@ const questionSchema = new mongoose.Schema({
 
 // Schema for a question set (contains multiple question-answer pairs)
 const questionSetSchema = new mongoose.Schema({
+    name: { // New field for the name of the question set
+        type: String,
+        required: true
+    },
+    description: { // New field for the description of the question set
+        type: String,
+        required: true
+    },
     questions: [questionSchema]  // An array of question-answer objects
 });
 
