@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { HiChevronDown } from "react-icons/hi";
+import { faqData } from "../constants/faq";
 
 interface FAQItem {
   question: string;
@@ -7,18 +8,9 @@ interface FAQItem {
 }
 
 const FAQComponent: React.FC = () => {
-  const [faqData, setFaqData] = useState<FAQItem[]>([]);
-  const [expandedFaqs, setExpandedFaqs] = useState<{ [key: number]: boolean }>({});
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("/data/FAQ.json");
-      const data = await response.json();
-      setFaqData(data);
-    };
-
-    fetchData();
-  }, []);
+  const [expandedFaqs, setExpandedFaqs] = useState<{ [key: number]: boolean }>(
+    {}
+  );
 
   const toggleFaq = (index: number): void => {
     setExpandedFaqs((prevState) => ({
@@ -41,14 +33,12 @@ const FAQComponent: React.FC = () => {
             <span className="text-white text-lg">{faq.question}</span>
             <HiChevronDown
               className={`text-white transition-transform duration-300 text-3xl ${
-                expandedFaqs[index] ? 'transform rotate-180' : ''
+                expandedFaqs[index] ? "transform rotate-180" : ""
               }`}
             />
           </button>
           {expandedFaqs[index] && faq.answer && (
-            <div className="px-2 pb-4 text-gray-400">
-              {faq.answer}
-            </div>
+            <div className="px-2 pb-4 text-gray-400">{faq.answer}</div>
           )}
         </div>
       ))}

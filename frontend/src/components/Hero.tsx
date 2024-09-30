@@ -19,7 +19,7 @@ const Hero = () => {
               <Link to="create-quizora">Get Started</Link>
             </button>
             <button className="border-2 border-white text-white font-bold px-8 py-3 rounded-2xl shadow-lg  hover:scale-105 transition-all duration-300 ease-in-out">
-              Explore Quizzes
+              Explore Quizora
             </button>
           </div>
         </div>
