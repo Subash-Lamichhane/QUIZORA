@@ -5,6 +5,8 @@ import NavBar from "../components/NavBar";
 import Tags from "../components/Tags";
 import QuizoraForm from "../components/QuizoraForm";
 import { tags } from "../constants/tags";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CreateQuizora = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -15,13 +17,18 @@ const CreateQuizora = () => {
   const [quizName, setQuizName] = useState("");
   const [quizDescription, setQuizDescription] = useState("");
 
+  const navigate = useNavigate();
+
   const handleQuizora = () => {
     const data = { tags: selectedTags, model: selectedModel };
     console.log(data);
     setShowForm(true);
   };
 
-  const handleFormSubmit = (data: { name: string; description: string }) => {
+  const handleFormSubmit = async (data: {
+    name: string;
+    description: string;
+  }) => {
     console.log("Quiz Name:", data.name);
     console.log("Description:", data.description);
 
@@ -32,6 +39,21 @@ const CreateQuizora = () => {
     };
 
     console.log(payload);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/questionsets/generate",
+        payload
+      );
+      console.log("Response:", response.data);
+      // You can handle the response data here, e.g., show a success message
+
+      const { _id } = response.data;
+      navigate(`/quizora/${_id}`);
+    } catch (error) {
+      console.error("Error during API call:", error);
+      // You can handle the error here, e.g., show an error message
+    }
 
     setSelectedTags([]);
     setSelectedModel(null);

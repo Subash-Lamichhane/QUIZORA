@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
 export interface CardData {
-  id: number;
+  _id: number;
   question: string;
   answer: string;
 }
@@ -13,7 +13,7 @@ interface CardProps extends CardData {
 }
 
 const Card: React.FC<CardProps> = ({
-  id,
+  _id,
   question,
   answer,
   setCards,
@@ -24,16 +24,16 @@ const Card: React.FC<CardProps> = ({
 
   const rotateRaw = useTransform(x, [-150, 150], [-18, 18]);
   const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0]);
-  const isFront = id === cards[cards.length - 1].id;
+  const isFront = _id === cards[cards.length - 1]._id;
 
   const rotate = useTransform(() => {
-    const offset = isFront ? 0 : id % 2 ? 6 : -6;
+    const offset = isFront ? 0 : _id % 2 ? 6 : -6;
     return `${rotateRaw.get() + offset}deg`;
   });
 
   const handleDragEnd = () => {
     if (Math.abs(x.get()) > 100) {
-      setCards((prev) => prev.filter((card) => card.id !== id));
+      setCards((prev) => prev.filter((card) => card._id !== _id));
     }
   };
 
@@ -69,7 +69,7 @@ const Card: React.FC<CardProps> = ({
         {/* Front Face */}
         {!isFlipped && (
           <motion.div
-            className={`absolute backface-hidden flex items-center justify-center h-full w-full rounded-3xl bg-gray-200`}
+            className={`absolute backface-h_idden flex items-center justify-center h-full w-full rounded-3xl bg-gray-200`}
             style={{
               backfaceVisibility: "hidden",
             }}
@@ -81,7 +81,7 @@ const Card: React.FC<CardProps> = ({
         {/* Back Face */}
         {isFlipped && (
           <motion.div
-            className={`absolute backface-hidden flex items-center justify-center h-full w-full rounded-3xl text-white`}
+            className={`absolute backface-h_idden flex items-center justify-center h-full w-full rounded-3xl text-white`}
             style={{
               backfaceVisibility: "hidden",
             }}
