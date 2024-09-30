@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 
 const Hero = () => {
+  const handleScrollToExploreQuizora = () => {
+    const exploreQuizoraSection = document.getElementById("explore-quizora");
+    if (exploreQuizoraSection) {
+      exploreQuizoraSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <div className="bg-black h-[90vh] flex justify-center items-center px-64">
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 ">
@@ -18,7 +24,8 @@ const Hero = () => {
             <button className="bg-white text-black px-8 py-3 font-bold rounded-2xl shadow-lg  hover:scale-105 transition-all duration-300 ease-in-out">
               <Link to="create-quizora">Get Started</Link>
             </button>
-            <button className="border-2 border-white text-white font-bold px-8 py-3 rounded-2xl shadow-lg  hover:scale-105 transition-all duration-300 ease-in-out">
+            <button className="border-2 border-white text-white font-bold px-8 py-3 rounded-2xl shadow-lg  hover:scale-105 transition-all duration-300 ease-in-out"
+            onClick={handleScrollToExploreQuizora}>
               Explore Quizora
             </button>
           </div>

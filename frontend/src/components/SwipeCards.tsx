@@ -42,7 +42,7 @@ const SwipeCards: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center space-y-20  w-full h-full bg-black text-white p-6">
       <div className="text-center text-5xl font-black tracking-wider">
-        Testing Quizora
+        Quizora
       </div>
 
       {/* Cards */}

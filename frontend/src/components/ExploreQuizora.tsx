@@ -62,7 +62,7 @@ const ExploreQuizora = () => {
             <div
               className={`flex flex-col items-center justify-start space-y-4 w-full rounded-2xl shadow-lg transition-transform transform hover:scale-105 bg-gray-950 text-black p-6  hover:shadow-white border-2 border-white hover:cursor-pointer`}
             >
-              <h2 className="text-lg font-bold mb-2 bg-white text-black w-full rounded-xl text-center py-1 tracking-wider ">
+              <h2 className="text-lg font-bold mb-2 bg-white text-black w-full rounded-xl text-center py-1 tracking-wider line-clamp-1 px-1">
                 {card.name}
               </h2>
               <p className="text-md   text-gray-100 line-clamp-4 px-4 ">
