@@ -1,8 +1,7 @@
-// src/components/SwipeCards.tsx
 import React, { useState, useEffect } from "react";
 import Card, { CardData } from "./Card";
 import { useParams } from "react-router-dom";
-import { getRandomColor } from "../utils/getRandomColor";
+import CallToAction from "./CallToAction";
 
 type QuizParams = {
   id: string;
@@ -25,24 +24,38 @@ const SwipeCards: React.FC = () => {
       }
       const card_data: CardData[] = await response.json(); // Convert response to JSON
 
-      const coloredData = card_data.map((card: CardData) => ({
-        ...card,
-        color: getRandomColor(), // Assign a random color
-      }));
-
-      setCards(coloredData); // Set the state with colored card data
-      const data = await response.json();
-      setCards(data);
+      setCards(card_data); // Set the state with card data
     };
 
     fetchCardData();
   }, []);
 
   return (
-    <div className="grid h w-full place-items-center bg-neutral-100 h-full">
-      {cards.map((card) => (
-        <Card key={card.id} cards={cards} setCards={setCards} {...card} />
-      ))}
+    <div className="flex flex-col items-center justify-center space-y-20  w-full h-full bg-black text-white p-6">
+      <div className="text-center text-5xl font-black tracking-wider">
+        Testing Quizora
+      </div>
+
+      {/* Cards */}
+      <div className="grid place-items-center w-full">
+        {cards.length > 0 ? (
+          cards.map((card) => (
+            <Card key={card.id} cards={cards} setCards={setCards} {...card} />
+          ))
+        ) : (
+          
+          <div className="flex flex-col items-center justify-center p-6">
+          {/* Message */}
+            <h1 className="text-2xl font-bold mb-2">You have reached the end of Quizora</h1>
+        
+          {/* Call to Action */}
+          <div className="w-full flex justify-center">
+            <CallToAction />
+          </div>
+        </div>
+        
+        )}
+      </div>
     </div>
   );
 };

@@ -41,7 +41,10 @@ const ExploreQuizora = () => {
   ];
 
   return (
-    <div className="bg-black  flex flex-col items-center px-64 gap-8 mt-24">
+    <div
+      id="explore-quizora"
+      className="bg-black  flex flex-col items-center px-64 gap-8 mt-24"
+    >
       <h1 className="w-full text-4xl text-center  font-bold tracking-widest text-white py-6 mb-10">
         Explore Quizora
       </h1>

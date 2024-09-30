@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Hero = () => {
   return (
     <div className="bg-black h-[90vh] flex justify-center items-center px-64">
@@ -8,11 +10,13 @@ const Hero = () => {
             Create Your Quizora
           </h1>
           <p className="text-lg text-gray-400">
-          Uncover a world of quizzes thoughtfully tailored to match your unique interests, or take charge by designing your own personalized quiz experience to challenge and inspire others!
+            Uncover a world of quizzes thoughtfully tailored to match your
+            unique interests, or take charge by designing your own personalized
+            quiz experience to challenge and inspire others!
           </p>
           <div className="flex gap-4 mt-6 tracking-widest">
             <button className="bg-white text-black px-8 py-3 font-bold rounded-2xl shadow-lg  hover:scale-105 transition-all duration-300 ease-in-out">
-              Get Started
+              <Link to="create-quizora">Get Started</Link>
             </button>
             <button className="border-2 border-white text-white font-bold px-8 py-3 rounded-2xl shadow-lg  hover:scale-105 transition-all duration-300 ease-in-out">
               Explore Quizzes

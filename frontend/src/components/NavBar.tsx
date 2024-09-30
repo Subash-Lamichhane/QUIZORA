@@ -1,4 +1,5 @@
 import { FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -8,9 +9,15 @@ const NavBar = () => {
       </div>
 
       <ul className="flex space-x-12 text-xl">
-        <li>Home</li>
-        <li>About</li>
-        <li>FAQ</li>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/faq">FAQ</Link>
+        </li>
       </ul>
 
       <div className="text-3xl">
