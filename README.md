@@ -155,5 +155,5 @@ To explore Quira, visit: [https://quira.sh/](https://quira.sh/)
 
 ### Support Me! 🌟
 
-- **Vote for me on Quira**: [Vote here!]([https://quira.sh/quests/creator/submissions?questId=16](https://quira.sh/repo/Subash-Lamichhane-QUIZORA-864586874))
+- **Vote for me on Quira**: [Vote here!](https://quira.sh/repo/Subash-Lamichhane-QUIZORA-864586874)
 - **Star my GitHub repo**
