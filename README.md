@@ -104,9 +104,41 @@ http://localhost:3000
 **Quizora:**
 ![Quizora](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qd9y0c6rn6slobca65hr.png)
 
-**_This project was created for Quira Quest 16: School of Open Source_**
+## Contributing
 
-To explore Quira, visit: [https://quira.sh/](https://quira.sh/)
+We welcome contributions from the community! If you'd like to contribute to QUIZORA, please follow these steps:
+
+1. *Fork the Repository*: Click the "Fork" button on GitHub to create your copy.
+
+2. *Clone Your Fork*:
+ ```bash
+   git clone https://github.com/yourusername/QUIZORA.git
+```
+
+   
+3. *Create a Branch*:
+ ```bash
+   git checkout -b your-branch-name
+```
+ 
+4. *Make Changes*: Implement your changes.
+
+5. *Commit Your Changes*:
+ ```bash
+   git commit -m "Description of your changes"
+```
+
+6. *Push Your Changes*:
+ ```bash
+   git push -u origin your-branch-name
+```
+
+
+7. *Create a Pull Request*: Submit your changes for review.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
@@ -117,7 +149,11 @@ To explore Quira, visit: [https://quira.sh/](https://quira.sh/)
 - [Mongodb](https://www.mongodb.com/) for document-oriented database
 ---
 
+**_This project was created for Quira Quest 16: School of Open Source_**
+
+To explore Quira, visit: [https://quira.sh/](https://quira.sh/)
+
 ### Support Me! 🌟
 
-- **Vote for me on Quira**: [Vote here!](https://quira.sh/quests/creator/submissions?questId=16)
+- **Vote for me on Quira**: [Vote here!]([https://quira.sh/quests/creator/submissions?questId=16](https://quira.sh/repo/Subash-Lamichhane-QUIZORA-864586874))
 - **Star my GitHub repo**
