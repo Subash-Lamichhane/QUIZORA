@@ -24,6 +24,10 @@
 
 Effective learning often takes a backseat in today’s fast-paced world, where we process enormous volumes of information every day. QUIZORA, a revolutionary web application, redefines learning by making it engaging, personalized, and fun!
 
+## Demo
+<video src="https://github.com/user-attachments/assets/7a4a0a0d-d8fd-4545-9e63-895c644f6cf9"></video>
+
+
 ## Article
 Explore dev.to article for more information:
 https://dev.to/subashlamichhane/introducing-quizora-explore-the-joy-of-learning-with-quizzes-just-for-you-5eee
