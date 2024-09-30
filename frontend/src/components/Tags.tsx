@@ -14,7 +14,7 @@ const Tags = ({ tags, selectedTags, setSelectedTags }: TagsProps) => {
   };
 
   return (
-    <div className="px-64 flex flex-col py-6 gap-6  ">
+    <div id="tags" className="px-64 flex flex-col py-6 gap-6  ">
       <div className="text-4xl mb-4">
         Choose your tags
         <span className="underline">......</span>

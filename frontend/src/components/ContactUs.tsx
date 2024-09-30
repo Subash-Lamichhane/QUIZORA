@@ -19,7 +19,7 @@ const ContactUs: React.FC = () => {
   };
 
   return (
-    <div className="px-4 lg:px-64 flex justify-center items-center my-12">
+    <div className="px-4 lg:px-64 flex justify-center items-center my-20 mt-40">
       <div className="bg-black text-white p-8 flex flex-col lg:flex-row lg:justify-between lg:items-center">
         <div className="lg:w-1/2 mb-6 lg:mb-0">
           <h2 className="text-4xl font-bold mb-4">Send us a message...</h2>
