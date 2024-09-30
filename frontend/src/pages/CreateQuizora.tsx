@@ -7,10 +7,11 @@ import QuizoraForm from "../components/QuizoraForm";
 import { tags } from "../constants/tags";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { models } from "../constants/models";
 
 const CreateQuizora = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const models = ["llama3-8b-8192", "mistral-small", "gpt-4o-mini"];
+
   const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
 
