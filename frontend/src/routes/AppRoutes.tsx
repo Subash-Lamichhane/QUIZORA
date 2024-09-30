@@ -4,7 +4,7 @@ import CreateQuizora from "../pages/CreateQuizora";
 import FAQ from "../pages/FAQ";
 import NavBar from "../components/NavBar";
 import Quizora from "../pages/Quizora";
-
+import AboutPage from "../pages/AboutPage"
 const AppRoutes = () => {
   return (
     <Router>
@@ -12,7 +12,7 @@ const AppRoutes = () => {
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/create-quizora" element={<CreateQuizora />}></Route>
         <Route path="/quizora/:id" element={<Quizora />}></Route>
-
+        <Route path="/about" element={<AboutPage/>}></Route>
         <Route
           path="/faq"
           element={
