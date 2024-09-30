@@ -44,7 +44,7 @@ QUIZORA gives users the option to select from three advanced AI models, each wit
 - **Mistral-Small** for more creative and in-depth responses (80.7 tokens/s).
 
 ### 3. Save and Load Question Sets
-Have a favorite quiz? QUIZORA lets you save your generated question sets for future use, making studying more flexible and fun.
+Have a favorite quiz? QUIZORA automatically saves your generated quiz sets for future use, making studying more flexible and fun.
 
 ### 4. Interactive UI
 The user interface is intuitive and highly interactive. Seamlessly navigate through categories, browse questions, and answer them with ease—all in an engaging format.
