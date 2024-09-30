@@ -26,6 +26,7 @@ Effective learning often takes a backseat in today’s fast-paced world, where w
 
 ## Article
 Explore dev.to article for more information:
+https://dev.to/subashlamichhane/introducing-quizora-explore-the-joy-of-learning-with-quizzes-just-for-you-5eee
 
 ## Key Features
 
@@ -83,11 +84,21 @@ Ensure the backend server is running at:
 http://localhost:3000
 ```
 
-1. **Navigate to the Home Page:** Start by clicking "Get Started" or using the Navbar to reach the home page.
+1. **Navigate to the Quizora Page:** Start by clicking "Get Started" at home page.
 2. **Choose Your Tags:** Select the tags you're interested in, like Science, Technology, or Space.
 3. **Select an AI Model:** Pick a model based on your preferred performance—speed, creativity, or balanced.
 4. **Generate Your Quiz:** Hit the "Quizora" button and watch as your personalized quiz is generated instantly.
+5. **Explore quizzes:** Swap cards to get next cards, click on card to view answer to question.
 
+## Screenshots
+**Landing Page:**
+![Landing Page](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4hqlt6rlpdvcuoyoekzb.png)
+**Explore Section:**
+![Explore](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kj5ce9etraegxn9p4yut.png)
+**Create Quizora:**
+![Choose tags and model](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3s48xwwzjwc9y5i0i34e.png)
+**Quizora:**
+![Quizora](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qd9y0c6rn6slobca65hr.png)
 
 **_This project was created for Quira Quest 16: School of Open Source_**
 
@@ -105,4 +116,4 @@ To explore Quira, visit: [https://quira.sh/](https://quira.sh/)
 ### Support Me! 🌟
 
 - **Vote for me on Quira**: [Vote here!](https://quira.sh/quests/creator/submissions?questId=16)
-- **Star my GitHub repo**: [Give us a star!](https://github.com/Subash-Lamichhane/QUIZORA)
+- **Star my GitHub repo**

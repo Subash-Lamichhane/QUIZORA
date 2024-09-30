@@ -56,3 +56,9 @@ Start the backend server:
 yarn run dev
 ```
 The backend server will be running on PORT 3000.
+
+Populate database with sample data while backend is running to load sample data to database:
+
+```
+node populateDatabase.js
+```
