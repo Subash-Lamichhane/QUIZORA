@@ -19,19 +19,22 @@ const FAQ = () => {
       <h1 className="text-4xl font-bold tracking-widest mb-16 text-center">
         Frequently Asked Questions
       </h1>
-      <div className="min-h-[20rem]">
+      <div className="space-y-4">
         {faqData.map((faq: FAQItem, index: number) => (
-          <div key={index} className="mb-4 border-b border-gray-500 pb-4">
-            <div className="flex justify-between items-center w-full">
+          <div
+            key={index}
+            className="bg-gray-800 rounded-lg p-4 transition-all duration-300 ease-in-out hover:shadow-md"
+          >
+            <div className="flex justify-between items-center">
               <button
                 onClick={() => toggleFaq(index)}
-                className="w-full text-left text-lg font-medium text-gray-100 hover:text-gray-300 focus:outline-none pt-2 transition-all duration-200 ease-in-out"
+                className="w-full text-left text-lg font-medium text-gray-200 hover:text-gray-300 focus:outline-none transition-colors duration-200"
               >
                 {faq.question}
               </button>
               <button
                 onClick={() => toggleFaq(index)}
-                className="text-white ml-4 focus:outline-none pt-1 transition-transform duration-200 ease-in-out hover:scale-110"
+                className="focus:outline-none pt-1 transition-transform duration-200 ease-in-out hover:scale-110"
               >
                 {expandedFaqs[index] ? (
                   <span className="text-white">➖</span>

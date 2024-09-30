@@ -1,5 +1,3 @@
-import React from "react";
-
 interface CardData {
   id: number;
   title: string;
@@ -43,8 +41,8 @@ const ExploreQuizora = () => {
   ];
 
   return (
-    <div className="bg-black  flex flex-col items-center px-64 gap-8">
-      <h1 className="w-full text-4xl text-center underline underline-offset-4 font-bold tracking-widest text-white py-6">
+    <div className="bg-black  flex flex-col items-center px-64 gap-8 mt-24">
+      <h1 className="w-full text-4xl text-center  font-bold tracking-widest text-white py-6 mb-10">
         Explore Quizora
       </h1>
 
@@ -53,7 +51,7 @@ const ExploreQuizora = () => {
         {cards.map((card) => (
           <div
             key={card.id}
-            className={`flex flex-col items-center justify-start w-full rounded-3xl shadow-lg transition-transform transform hover:scale-105 bg-gray-950 text-black p-6  hover:shadow-white border-2 border-white hover:cursor-pointer`}
+            className={`flex flex-col items-center justify-start space-y-4 w-full rounded-2xl shadow-lg transition-transform transform hover:scale-105 bg-gray-950 text-black p-6  hover:shadow-white border-2 border-white hover:cursor-pointer`}
           >
             <h2 className="text-lg font-bold mb-2 bg-white text-black w-full rounded-xl text-center py-1 tracking-wider ">
               {card.title}
