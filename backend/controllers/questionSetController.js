@@ -64,11 +64,11 @@ exports.getAllQuestionSets = async (req, res) => {
 
 // Generate a new question set using OpenAI or Mistral AI based on the model from frontend
 exports.generateQuestionSet = async (req, res) => {
-    const { tags, model } = req.body;
+    const { name, description, tags, model } = req.body;
 
     // Validate input from frontend
-    if (!tags || !model || (model !== "gpt-4o-mini" && model !== "mistral-small" && model !== "llama3-8b-8192")) {
-        return res.status(400).json({ error: 'Please provide a valid tags and model (model should be "openai" or "mistral" or "llama")' });
+    if (!name || !description || !tags || !model || (model !== "gpt-4o-mini" && model !== "mistral-small" && model !== "llama3-8b-8192")) {
+        return res.status(400).json({ error: 'Please provide a valid name, description, tags, and model (model should be "gpt-4o-mini", "mistral-small", or "llama3-8b-8192")' });
     }
 
     try {
@@ -89,20 +89,32 @@ exports.generateQuestionSet = async (req, res) => {
                 model: 'mistral-small',
                 messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question":"question1","answer":"answer1"},{"question":"question2","answer":"answer2"},...] with no other text. Give me those questions based on tags:: ${tags}`}],
             });
-            console.log("response:", chatResponse.choices[0].message.content)
-            generatedText = chatResponse.choices[0].message.content;
+            generatedText = chatResponse.choices[0].message.content.trim();
         } else if (model === "llama3-8b-8192") {
-        // Use llama AI API
-        const chatResponse = await llamaClient.chat.completions.create({
-            messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question":"question1","answer":"answer1"},{"question":"question2","answer":"answer2"},...] with no other text. Give me those questions based on tags:: ${tags}`}],
-            model: 'llama-3.1-8b-instant',
-          });
-        console.log("response:", chatResponse.choices[0].message.content)
-        generatedText = chatResponse.choices[0].message.content;
+            // Use llama AI API
+            const chatResponse = await llamaClient.chat.completions.create({
+                messages: [{ role: 'user', content: `create 10 "guess who is type" questions and answer set for a quiz game strictly in format [{"question":"question1","answer":"answer1"},{"question":"question2","answer":"answer2"},...] with no other text. Give me those questions based on tags:: ${tags}`}],
+                model: 'llama-3.1-8b-instant',
+            });
+            generatedText = chatResponse.choices[0].message.content.trim();
+        }
+
+        // Parse the generatedText into JSON format
+        let questions;
+        try {
+            questions = JSON.parse(generatedText);
+        } catch (parseErr) {
+            return res.status(500).json({ error: 'Failed to parse generated questions' });
+        }
+        
+        console.log(typeof(questions))
+        // Create and save new question set
+        const newQuestionSet = new QuestionSet({ name, description, questions });
+        await newQuestionSet.save();
+        res.status(201).json(newQuestionSet);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to generate question set' });
     }
-    res.status(201).json(generatedText);
-} catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to generate question set' });
-}
 };
