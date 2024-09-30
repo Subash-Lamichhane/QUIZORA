@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url("/fonts/Helvetica.ttf");
+}
+
+@font-face {
+    font-family: 'Cascadia';
+    src: url("/fonts/Cascadia.ttf");
+}
+
+body {
+    font-family: 'Helvetica';
+    background-color: black;
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+}

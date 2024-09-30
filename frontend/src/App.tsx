@@ -1,9 +1,9 @@
-const App = () => {
-  return (
-    <div className="flex justify-center items-center text-7xl bg-black text-white h-screen">
-      Hello World
-    </div>
-  );
+import React from "react";
+
+import AppRoutes from "./routes/AppRoutes";
+
+const App: React.FC = () => {
+  return <AppRoutes />;
 };
 
 export default App;
